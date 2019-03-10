@@ -1,5 +1,6 @@
 @charset "utf-8";
 /* CSS Document */
+* { box-sizing: border-box; }
 
 body,td,th,p{
 	font-family: Arial, Helvetica, sans-serif;
@@ -37,6 +38,8 @@ article, aside, canvas, details, figcaption, figure, footer, header, hgroup, men
 }
 #maincontent {
   background-color: #f3f3f3;
+  display: flex;
+  flex-direction: column;
   min-height: 100%;
 }
 #footer {
@@ -44,12 +47,15 @@ article, aside, canvas, details, figcaption, figure, footer, header, hgroup, men
   color: #aaa;
   font-size: 8pt;
   letter-spacing: 1px;
-  padding: 25px;
+  padding: 25px 0;
   text-align: center;
   text-transform: uppercase;
 }
 /* ====================== Navigation ====================== */
 nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 80px;
   background-color: #252831;
@@ -65,38 +71,6 @@ nav h1 a {
   letter-spacing: 10px;
   text-transform: uppercase;
 }
-#breadcrumb {
-    padding: 10px 40px 16px;
-    list-style: none;
-    background-color: #eee;
-    font-size: 17px;
-    margin: 0;
-    width: calc(50% - 80px);
-}
-
-/* Display list items side by side */
-#breadcrumb li {
-    display: inline;
-}
-
-/* Add a slash symbol (/) before/behind each list item */
-#breadcrumb li+li:before {
-    padding: 8px;
-    color: black;
-    content: "/\00a0";
-}
-
-/* Add a color to all links inside the list */
-#breadcrumb li a {
-    color: #0275d8;
-    text-decoration: none;
-}
-
-/* Add a color on mouse-over */
-#breadcrumb li a:hover {
-    color: #01447e;
-    text-decoration: underline;
-}
 /* ====================== Map ====================== */
 #map {
   height: 400px;
@@ -105,17 +79,22 @@ nav h1 a {
 }
 /* ====================== Restaurant Filtering ====================== */
 .filter-options {
-  width: 100%;
-  height: 50px;
   background-color: #3397DB;
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
+  padding: 15px 10%;
+  width: 100%;
 }
 .filter-options h2 {
   color: white;
   font-size: 1rem;
   font-weight: normal;
   line-height: 1;
+  text-align: center;
   margin: 0 20px;
+  width: 100%;
 }
 .filter-options select {
   background-color: white;
@@ -130,30 +109,52 @@ nav h1 a {
 }
 
 /* ====================== Restaurant Listing ====================== */
-#restaurants-list {
-  background-color: #f3f3f3;
-  list-style: outside none none;
-  margin: 0;
-  padding: 30px 15px 60px;
-  text-align: center;
+.restaurant-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
+
+#restaurants-list {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #f3f3f3;
+  justify-content: space-between;
+  list-style: outside none none;
+  margin: 0 auto;
+  padding: 30px 15px 90px;
+  text-align: center;
+  width: 80%;
+}
+
+#restaurants-list::after {
+  content: '';
+  flex: auto;
+}
+
 #restaurants-list li {
   background-color: #fff;
   border: 2px solid #ccc;
   font-family: Arial,sans-serif;
   margin: 15px;
   min-height: 380px;
-  padding: 0 30px 25px;
+  padding-bottom: 25px;
   text-align: left;
-  width: 270px;
+  width: 31%;
 }
+
+#restaurants-list li h1,
+#restaurants-list li p {
+  padding: 0 10%;
+}
+
 #restaurants-list .restaurant-img {
   background-color: #ccc;
   display: block;
   margin: 0;
   max-width: 100%;
-  min-height: 248px;
-  min-width: 100%;
+  min-height: auto;
+  width: 100%;
 }
 #restaurants-list li h1 {
   color: #f18200;
@@ -175,7 +176,7 @@ nav h1 a {
   color: #fff;
   display: inline-block;
   font-size: 10pt;
-  margin: 15px 0 0;
+  margin: 15px 0 0 10%;
   padding: 8px 30px 10px;
   text-align: center;
   text-decoration: none;
@@ -183,29 +184,27 @@ nav h1 a {
 }
 
 /* ====================== Restaurant Details ====================== */
-.inside header {
+header {
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 1000;
 }
-.inside #map-container {
+#map-container {
   background: blue none repeat scroll 0 0;
-  height: 87%;
-  position: fixed;
-  right: 0;
-  top: 80px;
-  width: 50%;
+  display: block;
+  height: 50vh;
+  width: 100%;
 }
-.inside #map {
+#map {
   background-color: #ccc;
   height: 100%;
   width: 100%;
 }
-.inside #footer {
+#footer {
   bottom: 0;
   position: absolute;
-  width: 50%;
+  width: 100%;
 }
 #restaurant-name {
   color: #f18200;
@@ -272,4 +271,9 @@ nav h1 a {
 }
 #restaurant-hours td {
   color: #666;
+}
+
+@media (max-width: 920px) {
+  #restaurants-list { width: 95%; }
+  #restaurants-list li { width: 100%; }
 }
